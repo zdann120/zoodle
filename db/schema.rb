@@ -11,15 +11,15 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160208230427) do
+ActiveRecord::Schema.define(version: 20160208230843) do
 
   create_table "choices", force: :cascade do |t|
     t.string   "uuid"
     t.datetime "time"
-    t.integer  "subscriber_id"
-    t.datetime "created_at",    null: false
-    t.datetime "updated_at",    null: false
-    t.index ["subscriber_id"], name: "index_choices_on_subscriber_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer  "poll_id"
+    t.index ["poll_id"], name: "index_choices_on_poll_id"
   end
 
   create_table "polls", force: :cascade do |t|
@@ -29,6 +29,15 @@ ActiveRecord::Schema.define(version: 20160208230427) do
     t.string   "email"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "selections", force: :cascade do |t|
+    t.integer  "subscriber_id"
+    t.integer  "choice_id"
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
+    t.index ["choice_id"], name: "index_selections_on_choice_id"
+    t.index ["subscriber_id"], name: "index_selections_on_subscriber_id"
   end
 
   create_table "subscribers", force: :cascade do |t|
