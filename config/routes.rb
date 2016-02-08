@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  get 'static/index'
+
   ActiveAdmin.routes(self)
   resources :choices
   resources :subscribers
