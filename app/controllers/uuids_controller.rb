@@ -1,2 +1,0 @@
-class UuidsController < ApplicationController
-end
