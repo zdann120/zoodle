@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  uuid: MyString
+  maxchoices: 1
+  label: MyString
+  email: MyString
+
+two:
+  uuid: MyString
+  maxchoices: 1
+  label: MyString
+  email: MyString
