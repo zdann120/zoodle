@@ -1,2 +1,12 @@
-<h1>Static#index</h1>
-<p>Find me in app/views/static/index.html.erb</p>
+<table>
+	<tr>
+		<th>Poll Name</th>
+		<th>Actions</th>
+	</tr>
+	<% @polls.each do |poll| %>
+		<tr>
+			<td><%= poll.label %></td>
+			<td><%= link_to "View Poll", poll_path(poll) %></td>
+		</tr>
+	<% end %>
+</table>

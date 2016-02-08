@@ -1,0 +1,28 @@
+<h1><%= @poll.label %></h1>
+<h2>Subscribers:</h2>
+
+<table>
+	<tr>
+		<th>Email</th>
+	</tr>
+	<% @poll.subscribers.each do |subscriber| %>
+		<tr>
+			<th><%= subscriber.email %></th>
+		</tr>
+	<% end %>
+	
+</table>
+<h2>Slots</h2>
+<table>
+	<tr>
+		<th>Time</th>
+		<th>Count</th>
+	</tr>
+	<% @poll.choices.each do |choice| %>
+		<tr>
+			<td><%= choice.time %></td>
+			<td><%= choice.subscribers.count %></td>
+		</tr>
+	<% end %>
+	
+</table>
