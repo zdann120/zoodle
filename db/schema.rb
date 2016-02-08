@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160208225917) do
+ActiveRecord::Schema.define(version: 20160208230132) do
 
   create_table "polls", force: :cascade do |t|
     t.string   "uuid"
@@ -20,6 +20,15 @@ ActiveRecord::Schema.define(version: 20160208225917) do
     t.string   "email"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "subscribers", force: :cascade do |t|
+    t.string   "uuid"
+    t.string   "email"
+    t.integer  "poll_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["poll_id"], name: "index_subscribers_on_poll_id"
   end
 
 end

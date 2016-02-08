@@ -1,6 +1,6 @@
 require 'test_helper'
 
-class UuidsControllerTest < ActionDispatch::IntegrationTest
+class SubscriberTest < ActiveSupport::TestCase
   # test "the truth" do
   #   assert true
   # end
