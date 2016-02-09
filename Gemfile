@@ -37,6 +37,8 @@ gem "simple_form", github: 'plataformatec/simple_form'
 
 gem 'bootstrap-sass'
 
+gem 'devise-bootstrap-views'
+
 gem 'devise', github: 'plataformatec/devise'
 
 gem 'friendly_id'
