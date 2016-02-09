@@ -1,9 +1,6 @@
 ActiveAdmin.register_page "Dashboard" do
 
-  #menu true
-  if user_signed_in?
-    menu false
-  end
+  menu false
 
   content title: "Zoodle Admin" do
     if user_signed_in?
