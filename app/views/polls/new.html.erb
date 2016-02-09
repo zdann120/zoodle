@@ -2,5 +2,5 @@
 <%= simple_form_for @poll, html: { class: 'form-horizontal' }, method: :post do |f| %>
 	<%= f.input :label, label: "Poll Title" %>
 	<%= f.input :maxchoices, label: "Expire in ___ days" %>
-	<%= f.submit %>
+	<%= f.button :submit %>
 <% end %>

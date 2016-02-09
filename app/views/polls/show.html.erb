@@ -1,6 +1,6 @@
 <h1><%= @poll.label %></h1>
 <%= text_field_tag "share_url", poll_url(@poll), disabled: true, class: 'form-control' %>
-<h2>Respondants:</h2>
+<h2>Respondents:</h2>
 <p>This is a list of all emails that have responded to this poll.</p>
 <table class="table table-condensed table-bordered">
 	<tr>
@@ -13,7 +13,7 @@
 	<% end %>
 	
 </table>
-<h2>Slots</h2>
+<h2>Slots:</h2>
 <p>This is a list of proposed times.  The time(s) with the greatest number of available guests will be indicated with the word "BEST".</p>
 <table class="table table-condensed table-bordered table-striped">
 	<tr>
@@ -45,14 +45,14 @@
 <%= simple_form_for [@poll, Subscriber.new], method: :post, action: new_poll_subscriber_path(poll_id: @poll) do |f| %>
 	<%= f.input :email, label: "Email" %>
 	<%= f.association :choices, as: :check_boxes, collection: @poll.choices %>
-	<%= f.submit %>
+	<%= f.button :submit, label: "Submit your availability" %>
 <% end %>
 <% if user_signed_in? %>
 	<% if current_user == @poll.user %>
 		<h2>Add slots:</h2>
 		<%= simple_form_for [@poll, Choice.new] do |f| %>
 			<%= f.input :time, as: :datetime, ampm: true, minute_step: 5 %>
-			<%= f.submit %>
+			<%= f.button :submit, label: 'Add Slot' %>
 		<% end %>
 	<% else %>
 		<% # if poll doesnt belong to current user %>
