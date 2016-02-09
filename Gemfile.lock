@@ -100,6 +100,7 @@ GEM
       thor (~> 0.19)
     builder (3.2.2)
     byebug (8.2.2)
+    cancancan (1.13.1)
     choice (0.2.0)
     coderay (1.1.0)
     coffee-rails (4.1.1)
@@ -257,6 +258,7 @@ DEPENDENCIES
   binding_of_caller
   bootstrap-sass
   byebug
+  cancancan
   coffee-rails (~> 4.1.0)
   devise!
   friendly_id
