@@ -1,19 +1,21 @@
 <h1>Welcome to Zoodle!</h1>
 <p class="lead">A simple website for finding meeting times that work for everyone!</p>
-<table>
-	<tr>
-		<th>Poll Name</th>
-		<th>Actions</th>
-	</tr>
-	<% @polls.each do |poll| %>
-		<tr>
-			<td><%= poll.label %></td>
-			<td><%= link_to "View Poll", poll_path(poll) %></td>
-		</tr>
-	<% end %>
-</table>
+
 <% if user_signed_in? %>
-	<%= link_to "New Poll", new_poll_path %>
+	<h2>Your polls:</h2>
+	<table class="table table-condensed table-striped table-bordered">
+		<tr>
+			<th>Poll Name</th>
+			<th></th>
+		</tr>
+		<% current_user.polls.each do |poll| %>
+			<tr>
+				<td><%= poll.label %></td>
+				<td><%= link_to "View Poll", poll_path(poll) %></td>
+			</tr>
+		<% end %>
+	</table>
+	<%= link_to "New Poll", new_poll_path, class: 'btn btn-lg btn-success' %>
 <% else %>
-	<%= link_to "Sign in", new_user_session_path %>
+	Sign in to create a poll, and view polls you've already created.
 <% end %>
