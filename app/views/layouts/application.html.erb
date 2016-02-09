@@ -11,10 +11,12 @@
 
   <body>
     <div class="container">
+      <br>
+      <%= image_tag 'logo.png' %>
       <% if !user_signed_in? %>
-        <%= link_to "Sign in", new_user_session_path %>
+        <%= link_to "Sign in", new_user_session_path, class: 'btn btn-sm btn-success' %>
       <% else %>
-        <%= link_to "Sign out", destroy_user_session_path, method: :delete %>
+        <%= link_to "Sign out", destroy_user_session_path, method: :delete, class: 'btn btn-sm btn-danger' %>
       <% end %>
       <% if flash[:notice] || flash[:alert] %>
         <p class="notice"><%= notice %></p>
