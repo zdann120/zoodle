@@ -8,7 +8,7 @@ class Choice < ApplicationRecord
   end
 
   def formatted_time
-  	self.time.strftime("%e %b %Y %I:%M %p")
+  	self.time.strftime("%Y %b %e %I:%M %p")
   end
 
   

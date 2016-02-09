@@ -1,7 +1,7 @@
 <h1><%= @poll.label %></h1>
 <%= text_field_tag "share_url", poll_url(@poll), disabled: true, class: 'form-control' %>
-<h2>Subscribers:</h2>
-
+<h2>Respondants:</h2>
+<p>This is a list of all emails that have responded to this poll.</p>
 <table class="table table-condensed table-bordered">
 	<tr>
 		<th>Email</th>
@@ -14,7 +14,8 @@
 	
 </table>
 <h2>Slots</h2>
-<table class="table table-condensed table-bordered">
+<p>This is a list of proposed times.  The time(s) with the greatest number of available guests will be indicated with the word "BEST".</p>
+<table class="table table-condensed table-bordered table-striped">
 	<tr>
 		<th>Time</th>
 		<th>Who?</th>
@@ -39,9 +40,10 @@
 	
 </table>
 
-<h2>Select a slot:</h2>
+<h2>Select your availability:</h2>
+<p>Enter your email address, and check the box next to all the times you are available.</p>
 <%= simple_form_for [@poll, Subscriber.new], method: :post, action: new_poll_subscriber_path(poll_id: @poll) do |f| %>
-	<%= f.input :email %>
+	<%= f.input :email, label: "Email" %>
 	<%= f.association :choices, as: :check_boxes, collection: @poll.choices %>
 	<%= f.submit %>
 <% end %>
@@ -49,7 +51,7 @@
 	<% if current_user == @poll.user %>
 		<h2>Add slots:</h2>
 		<%= simple_form_for [@poll, Choice.new] do |f| %>
-			<%= f.input :time %>
+			<%= f.input :time, as: :datetime, ampm: true, minute_step: 5 %>
 			<%= f.submit %>
 		<% end %>
 	<% else %>
