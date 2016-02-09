@@ -1,4 +1,5 @@
 <h1><%= @poll.label %></h1>
+<p class="lead"><%= @poll.description %></p>
 <strong>Share:</strong> <span class="small">Don't worry, other users won't need to log in.  They also won't be able to add or delete slots.</span> <%= text_field_tag "share_url", poll_url(@poll), disabled: true, class: 'form-control' %> <br>
 
 <h2>Slots:</h2>
@@ -31,22 +32,40 @@
 	<% end %>
 	
 </table>
-
+<hr>
 <h2>Select your availability:</h2>
-<% if Time.zone.now <= (@poll.created_at + @poll.maxchoices.days) %>
-	
-	<p>Enter your email address, and check the box next to all the times you are available.</p>
-	<%= simple_form_for [@poll, Subscriber.new], method: :post, action: new_poll_subscriber_path(poll_id: @poll) do |f| %>
-		<%= f.input :email, label: "Email" %>
-		<%= f.association :choices, as: :check_boxes, collection: @poll.choices.order(time: :asc) %>
-		<%= f.button :submit, "Submit your availability" %>
+<% if !@poll.closed %>
+	<% if Time.zone.now <= (@poll.created_at + @poll.expire_in_days.days) %>
+		
+		<p>Enter your email address, and check the box next to all the times you are available.</p>
+		<%= simple_form_for [@poll, Subscriber.new], method: :post, action: new_poll_subscriber_path(poll_id: @poll) do |f| %>
+			<%= f.input :email, label: "Email" %>
+			<%= f.association :choices, as: :check_boxes, collection: @poll.choices.order(time: :asc) %>
+			<%= f.button :submit, "Submit your availability" %>
+		<% end %>
+		<p>Respond before: <%= (@poll.created_at + @poll.expire_in_days.days).strftime("%Y %b %e @ %I:%M %p") %></p>
+		<% if user_signed_in? %>
+			<hr>
+			<% if current_user == @poll.user %>
+				<h2>Add slots:</h2>
+				<%= simple_form_for [@poll, Choice.new] do |f| %>
+					<%= f.input :time, as: :datetime, ampm: true, minute_step: 5 %>
+					<%= f.button :submit, 'Add Slot' %>
+				<% end %>
+			<% else %>
+				<% # if poll doesnt belong to current user %>
+			<% end %>
+		<% else %>
+			<%= link_to "Login to add slots", new_user_session_path %>
+		<% end %>
+	<% else %>
+		<p>Responses are no longer being accepted.</p>
 	<% end %>
-	<p>Respond before: <%= (@poll.created_at + @poll.expire_in_days.days).strftime("%Y %b %e @ %I:%M %p") %></p>
 <% else %>
-	<p>Responses are no longer being accepted.</p>
+	<p>The poll has been closed.</p>
 <% end %>
 
-
+<hr>
 <h2>Respondents:</h2>
 <p>This is a list of all emails that have responded to this poll. <br>(*) indicates that the user is not available for any slot, due to deletion of one of more slots.</p>
 <table class="table table-condensed table-bordered">
@@ -62,17 +81,5 @@
 </table>
 
 
-<% if user_signed_in? %>
-	<% if current_user == @poll.user %>
-		<h2>Add slots:</h2>
-		<%= simple_form_for [@poll, Choice.new] do |f| %>
-			<%= f.input :time, as: :datetime, ampm: true, minute_step: 5 %>
-			<%= f.button :submit, 'Add Slot' %>
-		<% end %>
-	<% else %>
-		<% # if poll doesnt belong to current user %>
-	<% end %>
-<% else %>
-	<%= link_to "Login to add slots", new_user_session_path %>
-<% end %>
+
 

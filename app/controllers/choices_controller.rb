@@ -23,6 +23,6 @@ class ChoicesController < ApplicationController
 
 	private
 	def choice_params
-		params.require(:choice).permit(:uuid, :time)
+		params.require(:choice).permit(:uuid, :time, :closed, :description)
 	end
 end

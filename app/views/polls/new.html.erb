@@ -1,6 +1,7 @@
 <h1>New Poll</h1>
 <%= simple_form_for @poll, html: { class: 'form-horizontal' }, method: :post do |f| %>
 	<%= f.input :label, label: "Poll Title" %>
+	<%= f.input :description %>
 	<%= f.input :expire_in_days, label: "Expire in ___ days" %>
 	<%= f.button :submit %>
 <% end %>
