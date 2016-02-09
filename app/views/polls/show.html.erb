@@ -20,8 +20,8 @@
 	</tr>
 	<% @poll.choices.order(time: :asc).each do |choice| %>
 		<tr>
-			<td><%= choice.time %>
-				<% if @poll.subscribers.count == choice.subscribers.count %>
+			<td><%= choice.formatted_time %>
+				<% if @count == choice.subscribers.count %>
 					<strong style="color:red;">(BEST)</strong>
 				<% end %>
 

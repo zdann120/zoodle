@@ -3,6 +3,12 @@ class PollsController < ApplicationController
 	def show
 		@poll = Poll.friendly.find(params[:id])
 		@poll ||= Poll.find(params[:id])
+		@count = 0
+		@poll.choices.each do |choice|
+			if choice.subscribers.count > @count
+				@count = choice.subscribers.count
+			end
+		end
 	end
 
 	def new

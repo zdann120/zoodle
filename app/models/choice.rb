@@ -4,7 +4,11 @@ class Choice < ApplicationRecord
   belongs_to :poll
 
   def to_s
-  	time
+  	formatted_time
+  end
+
+  def formatted_time
+  	self.time.strftime("%e %b %Y %I:%M %p")
   end
 
   
