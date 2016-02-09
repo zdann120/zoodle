@@ -45,14 +45,14 @@
 <%= simple_form_for [@poll, Subscriber.new], method: :post, action: new_poll_subscriber_path(poll_id: @poll) do |f| %>
 	<%= f.input :email, label: "Email" %>
 	<%= f.association :choices, as: :check_boxes, collection: @poll.choices %>
-	<%= f.button :submit, label: "Submit your availability" %>
+	<%= f.button :submit, "Submit your availability" %>
 <% end %>
 <% if user_signed_in? %>
 	<% if current_user == @poll.user %>
 		<h2>Add slots:</h2>
 		<%= simple_form_for [@poll, Choice.new] do |f| %>
 			<%= f.input :time, as: :datetime, ampm: true, minute_step: 5 %>
-			<%= f.button :submit, label: 'Add Slot' %>
+			<%= f.button :submit, 'Add Slot' %>
 		<% end %>
 	<% else %>
 		<% # if poll doesnt belong to current user %>
