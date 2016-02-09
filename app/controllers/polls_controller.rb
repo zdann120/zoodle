@@ -30,6 +30,13 @@ class PollsController < ApplicationController
 		end
 	end
 
+	def destroy
+		@poll = Poll.friendly.find(params[:id])
+		@poll.destroy
+		flash[:notice] = "Poll (#{@poll.label}) destroyed."
+		redirect_to root_path
+	end
+
 	private
 	def poll_params
 		params.require(:poll).permit(:label, :maxchoices, :uuid, :email, :choices)

@@ -14,7 +14,11 @@
 				<% if @count == choice.subscribers.count %>
 					<strong style="color:red;">(BEST)</strong>
 				<% end %>
-
+				<% if user_signed_in? %>
+				<% if current_user == @poll.user %>
+					<%= link_to "Delete", poll_choice_path(@poll, choice), method: :delete %>
+				<% end %>
+				<% end %>
 			</td>
 			<td>
 				<ul>
@@ -37,14 +41,14 @@
 <% end %>
 
 <h2>Respondents:</h2>
-<p>This is a list of all emails that have responded to this poll.</p>
+<p>This is a list of all emails that have responded to this poll. <br>(*) indicates that the user is not available for any slot, due to deletion of one of more slots.</p>
 <table class="table table-condensed table-bordered">
 	<tr>
 		<th>Email</th>
 	</tr>
 	<% @poll.subscribers.each do |subscriber| %>
 		<tr>
-			<td><%= subscriber.email %></td>
+			<td><%= subscriber.email %> <%= "(*)" if subscriber.choices.count == 0 %></td>
 		</tr>
 	<% end %>
 	

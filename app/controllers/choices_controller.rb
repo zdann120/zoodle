@@ -13,6 +13,14 @@ class ChoicesController < ApplicationController
 		end
 	end
 
+	def destroy
+		@poll = Poll.friendly.find(params[:poll_id])
+		@choice = Choice.find(params[:id])
+		@choice.destroy
+		params[:notice] = "Choice destroyed successfully."
+		redirect_to poll_url(@poll)
+	end
+
 	private
 	def choice_params
 		params.require(:choice).permit(:uuid, :time)

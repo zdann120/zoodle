@@ -12,4 +12,6 @@ class Choice < ApplicationRecord
   end
 
   
+
+  
 end
