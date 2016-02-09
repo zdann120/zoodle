@@ -5,6 +5,7 @@
 	<% else %>
 		<% if current_user == @poll.user %>
 			<%= link_to "Re-open Poll", poll_open_path(@poll), method: :put, class: 'btn btn-sm btn-success' %>
+			
 		<% end %>
 	<% end %>
 <% end %>
@@ -62,8 +63,12 @@
 					<%= f.input :time, as: :datetime, ampm: true, minute_step: 5 %>
 					<%= f.button :submit, 'Add Slot' %>
 				<% end %>
-
-				#put mailer here
+				<hr>
+				<h2>Invite respondents:</h2>
+				<%= simple_form_for Poll.new, url: poll_invite_path(@poll) do |f| %>
+					<%= f.input :email %>
+					<%= f.button :submit, "Invite user" %>
+				<% end %>
 			<% else %>
 				<% # if poll doesnt belong to current user %>
 			<% end %>

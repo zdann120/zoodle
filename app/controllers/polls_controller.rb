@@ -53,6 +53,15 @@ class PollsController < ApplicationController
 		redirect_to root_path
 	end
 
+	def invite
+		@poll = Poll.friendly.find(params[:poll_id])
+		@email = params[:email]
+		PollMailer.invite(@poll, @email).deliver_now
+		flash[:notice] = "Invite sent!"
+		redirect_to poll_url(@poll)
+
+	end
+
 	private
 	def poll_params
 		params.require(:poll).permit(:label, :maxchoices, :uuid, :email, :choices)

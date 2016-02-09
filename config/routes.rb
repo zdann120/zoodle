@@ -10,6 +10,7 @@ Rails.application.routes.draw do
   	resources :choices
     put 'close' => 'polls#close'
     put 'open' => 'polls#open'
+    post 'invite' => 'polls#invite'
   end
 
   root 'static#index'
