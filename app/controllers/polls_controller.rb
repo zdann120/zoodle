@@ -55,7 +55,7 @@ class PollsController < ApplicationController
 
 	def invite
 		@poll = Poll.friendly.find(params[:poll_id])
-		@email = params[:email]
+		@email = params['poll']['email']
 		PollMailer.invite(@poll, @email).deliver_now
 		flash[:notice] = "Invite sent!"
 		redirect_to poll_url(@poll)
