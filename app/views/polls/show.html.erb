@@ -1,13 +1,13 @@
 <h1><%= @poll.label %></h1>
 <h2>Subscribers:</h2>
 
-<table>
+<table class="table table-condensed">
 	<tr>
 		<th>Email</th>
 	</tr>
 	<% @poll.subscribers.each do |subscriber| %>
 		<tr>
-			<th><%= subscriber.email %></th>
+			<td><%= subscriber.email %></td>
 		</tr>
 	<% end %>
 	
@@ -26,4 +26,17 @@
 	<% end %>
 	
 </table>
+
+<h2>Select a slot:</h2>
+<%= simple_form_for [@poll, Subscriber.new], method: :post, action: new_poll_subscriber_path(poll_id: @poll) do |f| %>
+	<%= f.input :email %>
+	<%= f.association :choices, as: :check_boxes %>
+	<%= f.submit %>
+<% end %>
+
+<h2>Add slots:</h2>
+<%= simple_form_for [@poll, Choice.new] do |f| %>
+	<%= f.input :time %>
+	<%= f.submit %>
+<% end %>
 

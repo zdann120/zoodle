@@ -35,6 +35,8 @@ gem "simple_calendar", "~> 2.0"
 
 gem "simple_form", github: 'plataformatec/simple_form'
 
+gem 'bootstrap-sass'
+
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug'
@@ -46,6 +48,7 @@ group :development do
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'spring'
   gem 'better_errors'
+  gem 'binding_of_caller'
   gem 'rails-erd'
 end
 

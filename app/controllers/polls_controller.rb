@@ -9,6 +9,7 @@ class PollsController < ApplicationController
 
 	def create
 		@poll = Poll.new(poll_params)
+		@poll.uuid = SecureRandom.uuid
 		if @poll.save
 			flash[:notice] = "Poll successfully added!"
 			redirect_to poll_url(@poll)
@@ -20,6 +21,6 @@ class PollsController < ApplicationController
 
 	private
 	def poll_params
-		params.require(:poll).permit(:label, :maxchoices, :uuid, :email)
+		params.require(:poll).permit(:label, :maxchoices, :uuid, :email, :choices)
 	end
 end

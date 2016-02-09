@@ -2,9 +2,14 @@ Rails.application.routes.draw do
   get 'static/index'
 
   ActiveAdmin.routes(self)
-  resources :choices
-  resources :subscribers
-  resources :polls
+  
+  
+  resources :polls do
+  	resources :subscribers
+  	resources :choices
+  end
+
+  root 'static#index'
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 
   # Serve websocket cable requests in-process
