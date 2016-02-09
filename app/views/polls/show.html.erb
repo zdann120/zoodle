@@ -38,7 +38,7 @@
 	<p>Enter your email address, and check the box next to all the times you are available.</p>
 	<%= simple_form_for [@poll, Subscriber.new], method: :post, action: new_poll_subscriber_path(poll_id: @poll) do |f| %>
 		<%= f.input :email, label: "Email" %>
-		<%= f.association :choices, as: :check_boxes, collection: @poll.choices %>
+		<%= f.association :choices, as: :check_boxes, collection: @poll.choices.order(time: :asc) %>
 		<%= f.button :submit, "Submit your availability" %>
 	<% end %>
 	<p>Respond before: <%= (@poll.created_at + @poll.maxchoices.days).strftime("%Y %b %e @ %I:%M %p") %></p>
