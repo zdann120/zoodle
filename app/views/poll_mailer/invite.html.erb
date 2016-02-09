@@ -1,3 +1,5 @@
-<h1>Zoodle!</h1>
-<p><%= @poll.user.email %> is requesting information about your availablity for: <%= @poll.label %></p>
+<h1>Zoodle poll for:</h1>
+<h2><%= @poll.label %></h2>
+<p>Your response is requested.  Please visit the link below and pick the time(s) you are available to meet.</p>
 <p>Visit this URL: <%= poll_url(@poll) %></p>
+<p>You will receive an email if/when the poll creator chooses a final time.</p>
