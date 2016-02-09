@@ -1,7 +1,7 @@
 ActiveAdmin.register Poll do
 	scope_to :current_user
 	actions :all, except: [:new]
-	before_filter :only => [:show] do
+	before_filter :only => [:show, :edit, :update] do
 	  @poll = Poll.friendly.find(params[:id])
 	end
 
