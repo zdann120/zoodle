@@ -42,7 +42,7 @@ class PollsController < ApplicationController
 		@poll = Poll.friendly.find(params[:poll_id])
 		@poll.closed = false
 		@poll.save
-		flash[:notice] = "Poll closed."
+		flash[:notice] = "Poll re-opened."
 		redirect_to poll_url(@poll)
 	end
 
