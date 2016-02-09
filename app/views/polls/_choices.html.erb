@@ -1,0 +1,27 @@
+<table class="table table-condensed table-bordered table-striped">
+	<tr>
+		<th>Time</th>
+		<th>Who?</th>
+	</tr>
+	<% @poll.choices.order(time: :asc).each do |choice| %>
+		<tr>
+			<td><%= choice.formatted_time %>
+				<% if @count == choice.subscribers.count %>
+					<strong style="color:red;">(BEST)</strong>
+				<% end %>
+				<% if user_signed_in? %>
+				<% if current_user == @poll.user %>
+					<%= link_to "Delete", poll_choice_path(@poll, choice), method: :delete %>
+				<% end %>
+				<% end %>
+			</td>
+			<td>
+				<ul>
+					<% choice.subscribers.each do |subscriber| %>
+						<li><%= subscriber.email %></li>
+					<% end %>
+				</ul>
+			</td>
+		</tr>
+	<% end %>
+</table>

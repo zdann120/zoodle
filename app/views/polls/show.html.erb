@@ -10,92 +10,32 @@
 	<% end %>
 <% end %>
 <p class="lead"><%= @poll.description %></p>
-<strong>Share:</strong> <span class="small">Don't worry, other users won't need to log in.  They also won't be able to add or delete slots.</span> <%= text_field_tag "share_url", poll_url(@poll), disabled: true, class: 'form-control' %> <br>
+<div class="row">
+	<div class="col-md-6">
+		<h2>Share:</h2>
+		<span class="small">Don't worry, other users won't need to log in.  They also won't be able to add or delete slots.</span> <%= text_field_tag "share_url", poll_url(@poll), disabled: true, class: 'form-control' %> <br>
+	</div>
+	<div class="col-md-6">
+		<h2>Invite respondents:</h2>
+			<%= render 'inviteform' %>
+	</div>
+</div>
+<hr>
+
+
 
 <h2>Slots:</h2>
 <p>This is a list of proposed times.  The time(s) with the greatest number of available guests will be indicated with the word "BEST".</p>
-<table class="table table-condensed table-bordered table-striped">
-	<tr>
-		<th>Time</th>
-		<th>Who?</th>
-	</tr>
-	<% @poll.choices.order(time: :asc).each do |choice| %>
-		<tr>
-			<td><%= choice.formatted_time %>
-				<% if @count == choice.subscribers.count %>
-					<strong style="color:red;">(BEST)</strong>
-				<% end %>
-				<% if user_signed_in? %>
-				<% if current_user == @poll.user %>
-					<%= link_to "Delete", poll_choice_path(@poll, choice), method: :delete %>
-				<% end %>
-				<% end %>
-			</td>
-			<td>
-				<ul>
-					<% choice.subscribers.each do |subscriber| %>
-						<li><%= subscriber.email %></li>
-					<% end %>
-				</ul>
-			</td>
-		</tr>
-	<% end %>
-	
-</table>
+<%= render 'choices' %>
 <hr>
 <h2>Select your availability:</h2>
 <p class="small">Expires at: <%= (@poll.created_at + @poll.expire_in_days.days).strftime("%Y %b %e @ %I:%M %p") %></p>
-<% if !@poll.closed %>
-	<% if Time.zone.now <= (@poll.created_at + @poll.expire_in_days.days) %>
-		
-		<p>Enter your email address, and check the box next to all the times you are available.</p>
-		<%= simple_form_for [@poll, Subscriber.new], method: :post, action: new_poll_subscriber_path(poll_id: @poll) do |f| %>
-			<%= f.input :email, label: "Email" %>
-			<%= f.association :choices, as: :check_boxes, collection: @poll.choices.order(time: :asc) %>
-			<%= f.button :submit, "Submit your availability" %>
-		<% end %>
-		
-		<% if user_signed_in? %>
-			<hr>
-			<% if current_user == @poll.user %>
-				<h2>Add slots:</h2>
-				<%= simple_form_for [@poll, Choice.new] do |f| %>
-					<%= f.input :time, as: :datetime, ampm: true, minute_step: 5 %>
-					<%= f.button :submit, 'Add Slot' %>
-				<% end %>
-				<hr>
-				<h2>Invite respondents:</h2>
-				<%= simple_form_for Poll.new, url: poll_invite_path(@poll) do |f| %>
-					<%= f.input :email %>
-					<%= f.button :submit, "Invite user" %>
-				<% end %>
-			<% else %>
-				<% # if poll doesnt belong to current user %>
-			<% end %>
-		<% else %>
-			<%= link_to "Login to add slots", new_user_session_path %>
-		<% end %>
-	<% else %>
-		<p>This poll has expireed.</p>
-	<% end %>
-<% else %>
-	<p>The poll has been closed.</p>
-<% end %>
+<%= render 'voteform' %>
 
 <hr>
 <h2>Respondents:</h2>
 <p>This is a list of all emails that have responded to this poll. <br>(*) indicates that the user is not available for any slot, due to deletion of one of more slots.</p>
-<table class="table table-condensed table-bordered">
-	<tr>
-		<th>Email</th>
-	</tr>
-	<% @poll.subscribers.each do |subscriber| %>
-		<tr>
-			<td><%= subscriber.email %> <%= "(*)" if subscriber.choices.count == 0 %></td>
-		</tr>
-	<% end %>
-	
-</table>
+<%= render 'respondents' %>
 
 
 

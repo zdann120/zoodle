@@ -1,0 +1,11 @@
+<table class="table table-condensed table-bordered">
+	<tr>
+		<th>Email</th>
+	</tr>
+	<% @poll.subscribers.each do |subscriber| %>
+		<tr>
+			<td><%= subscriber.email %> <%= "(*)" if subscriber.choices.count == 0 %></td>
+		</tr>
+	<% end %>
+	
+</table>

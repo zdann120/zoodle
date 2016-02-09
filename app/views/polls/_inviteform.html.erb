@@ -1,0 +1,4 @@
+<%= simple_form_for Poll.new, url: poll_invite_path(@poll) do |f| %>
+	<%= f.input :email %>
+	<%= f.button :submit, "Invite user" %>
+<% end %>
