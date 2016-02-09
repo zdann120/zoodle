@@ -41,7 +41,7 @@
 		<%= f.association :choices, as: :check_boxes, collection: @poll.choices.order(time: :asc) %>
 		<%= f.button :submit, "Submit your availability" %>
 	<% end %>
-	<p>Respond before: <%= (@poll.created_at + @poll.maxchoices.days).strftime("%Y %b %e @ %I:%M %p") %></p>
+	<p>Respond before: <%= (@poll.created_at + @poll.expire_in_days.days).strftime("%Y %b %e @ %I:%M %p") %></p>
 <% else %>
 	<p>Responses are no longer being accepted.</p>
 <% end %>

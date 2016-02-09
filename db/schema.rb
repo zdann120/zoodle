@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160209023155) do
+ActiveRecord::Schema.define(version: 20160209053742) do
 
   create_table "active_admin_comments", force: :cascade do |t|
     t.string   "namespace"
@@ -38,12 +38,14 @@ ActiveRecord::Schema.define(version: 20160209023155) do
 
   create_table "polls", force: :cascade do |t|
     t.string   "uuid"
-    t.integer  "maxchoices"
+    t.integer  "expire_in_days"
     t.string   "label"
     t.string   "email"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",                     null: false
+    t.datetime "updated_at",                     null: false
     t.integer  "user_id"
+    t.text     "description"
+    t.boolean  "closed",         default: false
     t.index ["user_id"], name: "index_polls_on_user_id"
   end
 
