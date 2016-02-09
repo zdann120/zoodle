@@ -18,7 +18,7 @@
 		<th>Time</th>
 		<th>Count</th>
 	</tr>
-	<% @poll.choices.each do |choice| %>
+	<% @poll.choices.order(time: :asc).each do |choice| %>
 		<tr>
 			<td><%= choice.time %></td>
 			<td><%= choice.subscribers.count %></td>
@@ -26,3 +26,4 @@
 	<% end %>
 	
 </table>
+

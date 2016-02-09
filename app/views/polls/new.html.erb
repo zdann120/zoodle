@@ -1,0 +1,7 @@
+<h1>New Poll</h1>
+<%= simple_form_for @poll, html: { class: 'form-horizontal' }, method: :post do |f| %>
+	<%= f.input :email %>
+	<%= f.input :label %>
+	<%= f.input :maxchoices %>
+	<%= f.submit %>
+<% end %>

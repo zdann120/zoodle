@@ -18,6 +18,14 @@ GIT
       sass-rails
       sprockets (< 4)
 
+GIT
+  remote: git://github.com/plataformatec/simple_form.git
+  revision: ac63da0f0b38df82385493f25f649e320b0acb4a
+  specs:
+    simple_form (3.2.1)
+      actionpack (> 4, < 5.1)
+      activemodel (> 4, < 5.1)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -180,6 +188,8 @@ GEM
       sprockets (>= 2.8, < 4.0)
       sprockets-rails (>= 2.0, < 4.0)
       tilt (>= 1.1, < 3)
+    simple_calendar (2.0.3)
+      rails (>= 3.0)
     spring (1.6.3)
     sprockets (3.5.2)
       concurrent-ruby (~> 1.0)
@@ -222,6 +232,8 @@ DEPENDENCIES
   rails-erd
   redis (~> 3.0)
   sass-rails (~> 5.0)
+  simple_calendar (~> 2.0)
+  simple_form!
   spring
   sqlite3
   turbolinks

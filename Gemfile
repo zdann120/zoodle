@@ -31,6 +31,10 @@ gem 'redis', '~> 3.0'
 # gem 'capistrano-rails', group: :development
 gem 'activeadmin', github: 'activeadmin', branch: 'rails-5-rspec'
 
+gem "simple_calendar", "~> 2.0"
+
+gem "simple_form", github: 'plataformatec/simple_form'
+
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug'
