@@ -5,10 +5,10 @@ class PollMailer < ApplicationMailer
   #
   #   en.poll_mailer.invite.subject
   #
-  def invite(poll)
+  def invite(poll, email)
     @poll = poll
 
-    mail to: @poll.user.email, subject: "Zoodle Poll: #{@poll.label}"
+    mail to: email, subject: "Zoodle Poll: #{@poll.label}"
   end
 
   # Subject can be set in your I18n file at config/locales/en.yml
