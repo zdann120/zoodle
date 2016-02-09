@@ -8,6 +8,8 @@ Rails.application.routes.draw do
   resources :polls do
   	resources :subscribers
   	resources :choices
+    put 'close' => 'polls#close'
+    put 'open' => 'polls#open'
   end
 
   root 'static#index'

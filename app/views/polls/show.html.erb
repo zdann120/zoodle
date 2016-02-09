@@ -1,4 +1,9 @@
 <h1><%= @poll.label %></h1>
+<% if @poll.closed == false %>
+	<%= link_to "Close Poll", poll_close_path(@poll), method: :put, class: 'btn btn-sm btn-warning' %>
+<% else %>
+	<%= link_to "Re-open Poll", poll_open_path(@poll), method: :put, class: 'btn btn-sm btn-success' %>
+<% end %>
 <p class="lead"><%= @poll.description %></p>
 <strong>Share:</strong> <span class="small">Don't worry, other users won't need to log in.  They also won't be able to add or delete slots.</span> <%= text_field_tag "share_url", poll_url(@poll), disabled: true, class: 'form-control' %> <br>
 
@@ -34,6 +39,7 @@
 </table>
 <hr>
 <h2>Select your availability:</h2>
+<p class="small">Expires at: <%= (@poll.created_at + @poll.expire_in_days.days).strftime("%Y %b %e @ %I:%M %p") %></p>
 <% if !@poll.closed %>
 	<% if Time.zone.now <= (@poll.created_at + @poll.expire_in_days.days) %>
 		
@@ -43,7 +49,7 @@
 			<%= f.association :choices, as: :check_boxes, collection: @poll.choices.order(time: :asc) %>
 			<%= f.button :submit, "Submit your availability" %>
 		<% end %>
-		<p>Respond before: <%= (@poll.created_at + @poll.expire_in_days.days).strftime("%Y %b %e @ %I:%M %p") %></p>
+		
 		<% if user_signed_in? %>
 			<hr>
 			<% if current_user == @poll.user %>
@@ -59,7 +65,7 @@
 			<%= link_to "Login to add slots", new_user_session_path %>
 		<% end %>
 	<% else %>
-		<p>Responses are no longer being accepted.</p>
+		<p>This poll has expireed.</p>
 	<% end %>
 <% else %>
 	<p>The poll has been closed.</p>

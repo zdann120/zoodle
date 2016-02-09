@@ -30,6 +30,22 @@ class PollsController < ApplicationController
 		end
 	end
 
+	def close
+		@poll = Poll.friendly.find(params[:poll_id])
+		@poll.closed = true
+		@poll.save
+		flash[:notice] = "Poll closed."
+		redirect_to poll_url(@poll)
+	end
+
+	def open
+		@poll = Poll.friendly.find(params[:poll_id])
+		@poll.closed = false
+		@poll.save
+		flash[:notice] = "Poll closed."
+		redirect_to poll_url(@poll)
+	end
+
 	def destroy
 		@poll = Poll.friendly.find(params[:id])
 		@poll.destroy
