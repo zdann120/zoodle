@@ -1,3 +1,5 @@
+<h1>Welcome to Zoodle!</h1>
+<p class="lead">A simple website for finding meeting times that work for everyone!</p>
 <table>
 	<tr>
 		<th>Poll Name</th>
@@ -10,4 +12,8 @@
 		</tr>
 	<% end %>
 </table>
-<%= link_to "New Poll", new_poll_path %>
+<% if user_signed_in? %>
+	<%= link_to "New Poll", new_poll_path %>
+<% else %>
+	<%= link_to "Sign in", new_user_session_path %>
+<% end %>

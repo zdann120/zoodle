@@ -1,10 +1,10 @@
 class SubscribersController < ApplicationController
 	def create
-		@poll = Poll.find(params[:poll_id])
+		@poll = Poll.friendly.find(params[:poll_id])
+		@poll ||= Poll.find(params[:poll_id])
 		@subscriber = @poll.subscribers.new(subscriber_params)
 		@subscriber.uuid = SecureRandom.uuid
 		if @subscriber.save
-			@subscriber.choice_ids << params[:choices]
 			redirect_to poll_url(@poll)
 		else
 		end

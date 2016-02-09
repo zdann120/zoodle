@@ -37,6 +37,10 @@ gem "simple_form", github: 'plataformatec/simple_form'
 
 gem 'bootstrap-sass'
 
+gem 'devise', github: 'plataformatec/devise'
+
+gem 'friendly_id'
+
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug'
@@ -50,6 +54,11 @@ group :development do
   gem 'better_errors'
   gem 'binding_of_caller'
   gem 'rails-erd'
+end
+
+group :production do
+	gem 'pg'
+	gem 'rails_12factor'
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem

@@ -1,6 +1,7 @@
 class ChoicesController < ApplicationController
 	def create
-		@poll = Poll.find(params[:poll_id])
+		@poll = Poll.friendly.find(params[:poll_id])
+		@poll ||= Poll.find(params[:poll_id])
 		@choice = @poll.choices.new(choice_params)
 		@choice.uuid = SecureRandom.uuid
 		if @choice.save

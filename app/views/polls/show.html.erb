@@ -1,7 +1,7 @@
 <h1><%= @poll.label %></h1>
 <h2>Subscribers:</h2>
 
-<table class="table table-condensed">
+<table class="table table-condensed table-bordered">
 	<tr>
 		<th>Email</th>
 	</tr>
@@ -13,15 +13,21 @@
 	
 </table>
 <h2>Slots</h2>
-<table>
+<table class="table table-condensed table-bordered">
 	<tr>
 		<th>Time</th>
-		<th>Count</th>
+		<th>Who?</th>
 	</tr>
 	<% @poll.choices.order(time: :asc).each do |choice| %>
 		<tr>
 			<td><%= choice.time %></td>
-			<td><%= choice.subscribers.count %></td>
+			<td>
+				<ul>
+					<% choice.subscribers.each do |subscriber| %>
+						<li><%= subscriber.email %></li>
+					<% end %>
+				</ul>
+			</td>
 		</tr>
 	<% end %>
 	
@@ -30,13 +36,20 @@
 <h2>Select a slot:</h2>
 <%= simple_form_for [@poll, Subscriber.new], method: :post, action: new_poll_subscriber_path(poll_id: @poll) do |f| %>
 	<%= f.input :email %>
-	<%= f.association :choices, as: :check_boxes %>
+	<%= f.association :choices, as: :check_boxes, collection: @poll.choices %>
 	<%= f.submit %>
 <% end %>
-
-<h2>Add slots:</h2>
-<%= simple_form_for [@poll, Choice.new] do |f| %>
-	<%= f.input :time %>
-	<%= f.submit %>
+<% if user_signed_in? %>
+	<% if current_user == @poll.user %>
+		<h2>Add slots:</h2>
+		<%= simple_form_for [@poll, Choice.new] do |f| %>
+			<%= f.input :time %>
+			<%= f.submit %>
+		<% end %>
+	<% else %>
+		<% # if poll doesnt belong to current user %>
+	<% end %>
+<% else %>
+	<%= link_to "Login to add slots", new_user_session_path %>
 <% end %>
 
