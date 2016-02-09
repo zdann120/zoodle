@@ -1,4 +1,5 @@
 class PollsController < ApplicationController
+	
 	before_action :authenticate_user!, only: [:new, :create]
 	def show
 		@poll = Poll.friendly.find(params[:id])
