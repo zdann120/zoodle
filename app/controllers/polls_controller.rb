@@ -19,7 +19,7 @@ class PollsController < ApplicationController
 
 	def create
 		@poll = Poll.new(poll_params)
-		@poll.uuid = SecureRandom.uuid
+		@poll.uuid = SecureRandom.hex(8)
 		@poll.user = current_user
 		if @poll.save
 			flash[:notice] = "Poll successfully added!"
