@@ -1,0 +1,14 @@
+<% if user_signed_in? %>
+	<hr>
+	<% if current_user == @poll.user %>
+		<h2>Add slots:</h2>
+		<%= simple_form_for [@poll, Choice.new] do |f| %>
+			<%= f.input :time, as: :datetime, ampm: true, minute_step: 5 %>
+			<%= f.button :submit, 'Add Slot' %>
+		<% end %>
+	<% else %>
+		<% # if poll doesnt belong to current user %>
+	<% end %>
+<% else %>
+	<%= link_to "Login to add slots", new_user_session_path %>
+<% end %>

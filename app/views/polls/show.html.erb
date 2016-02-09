@@ -22,16 +22,19 @@
 </div>
 <hr>
 
-
-
-<h2>Slots:</h2>
-<p>This is a list of proposed times.  The time(s) with the greatest number of available guests will be indicated with the word "BEST".</p>
-<%= render 'choices' %>
-<hr>
-<h2>Select your availability:</h2>
-<p class="small">Expires at: <%= (@poll.created_at + @poll.expire_in_days.days).strftime("%Y %b %e @ %I:%M %p") %></p>
-<%= render 'voteform' %>
-
+<div class="row">
+	<div class="col-md-6">
+		<h2>Slots:</h2>
+		<p>This is a list of proposed times.  The time(s) with the greatest number of available guests will be indicated with the word "BEST".</p>
+		<%= render 'choices' %>
+	</div>
+	<div class="col-md-6">
+		<h2>Select your availability:</h2>
+		<p class="small">Expires at: <%= (@poll.created_at + @poll.expire_in_days.days).strftime("%Y %b %e @ %I:%M %p") %></p>
+		<%= render 'voteform' %>
+	</div>
+</div>
+<%= render 'addslots' %>
 <hr>
 <h2>Respondents:</h2>
 <p>This is a list of all emails that have responded to this poll. <br>(*) indicates that the user is not available for any slot, due to deletion of one of more slots.</p>
