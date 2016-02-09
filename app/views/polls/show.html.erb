@@ -33,12 +33,19 @@
 </table>
 
 <h2>Select your availability:</h2>
-<p>Enter your email address, and check the box next to all the times you are available.</p>
-<%= simple_form_for [@poll, Subscriber.new], method: :post, action: new_poll_subscriber_path(poll_id: @poll) do |f| %>
-	<%= f.input :email, label: "Email" %>
-	<%= f.association :choices, as: :check_boxes, collection: @poll.choices %>
-	<%= f.button :submit, "Submit your availability" %>
+<% if Time.zone.now <= (@poll.created_at + @poll.maxchoices.days) %>
+	
+	<p>Enter your email address, and check the box next to all the times you are available.</p>
+	<%= simple_form_for [@poll, Subscriber.new], method: :post, action: new_poll_subscriber_path(poll_id: @poll) do |f| %>
+		<%= f.input :email, label: "Email" %>
+		<%= f.association :choices, as: :check_boxes, collection: @poll.choices %>
+		<%= f.button :submit, "Submit your availability" %>
+	<% end %>
+	<p>Respond before: <%= (@poll.created_at + @poll.maxchoices.days).strftime("%Y %b %e @ %I:%M %p") %></p>
+<% else %>
+	<p>Responses are no longer being accepted.</p>
 <% end %>
+
 
 <h2>Respondents:</h2>
 <p>This is a list of all emails that have responded to this poll. <br>(*) indicates that the user is not available for any slot, due to deletion of one of more slots.</p>
