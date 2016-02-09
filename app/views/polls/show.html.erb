@@ -1,8 +1,12 @@
 <h1><%= @poll.label %></h1>
-<% if @poll.closed == false %>
-	<%= link_to "Close Poll", poll_close_path(@poll), method: :put, class: 'btn btn-sm btn-warning' %>
-<% else %>
-	<%= link_to "Re-open Poll", poll_open_path(@poll), method: :put, class: 'btn btn-sm btn-success' %>
+<% if user_signed_in? %>
+	<% if @poll.closed == false && current_user == @poll.user  %>
+		<%= link_to "Close Poll", poll_close_path(@poll), method: :put, class: 'btn btn-sm btn-warning' %>
+	<% else %>
+		<% if current_user == @poll.user %>
+			<%= link_to "Re-open Poll", poll_open_path(@poll), method: :put, class: 'btn btn-sm btn-success' %>
+		<% end %>
+	<% end %>
 <% end %>
 <p class="lead"><%= @poll.description %></p>
 <strong>Share:</strong> <span class="small">Don't worry, other users won't need to log in.  They also won't be able to add or delete slots.</span> <%= text_field_tag "share_url", poll_url(@poll), disabled: true, class: 'form-control' %> <br>
