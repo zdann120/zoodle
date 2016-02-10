@@ -19,7 +19,7 @@
         <%= link_to "Sign out", destroy_user_session_path, method: :delete, class: 'btn btn-sm btn-danger' %>
       <% end %>
       <% if flash[:notice] || flash[:alert] %>
-        <div class="alert alert-sucess"><%= notice %></div>
+        <div class="alert alert-success"><%= notice %></div>
         <div class="alert alert-warning"><%= alert %></div>
       <% end %>
       <%= yield %>
