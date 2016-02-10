@@ -4,11 +4,12 @@
 		<th>Who?</th>
 	</tr>
 	<% @poll.choices.order(time: :asc).each do |choice| %>
-		<tr>
+		<tr class=<%= choice.final ? 'success' : 'warning' %>>
 			<td><%= choice.formatted_time %>
 				<% if @count == choice.subscribers.count %>
 					<strong style="color:red;">(BEST)</strong>
 				<% end %>
+				<%= choice.final ? raw("<strong>**FINAL**</strong>") : '' %>
 				<% if user_signed_in? %>
 				<% if current_user == @poll.user %>
 					<%= link_to "Delete", poll_choice_path(@poll, choice), method: :delete %>
