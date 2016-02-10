@@ -64,6 +64,6 @@ class PollsController < ApplicationController
 
 	private
 	def poll_params
-		params.require(:poll).permit(:label, :expire_in_days, :uuid, :email, :choices)
+		params.require(:poll).permit(:label, :expire_in_days, :uuid, :email, :choices, :description)
 	end
 end
