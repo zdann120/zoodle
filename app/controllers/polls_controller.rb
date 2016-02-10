@@ -59,7 +59,6 @@ class PollsController < ApplicationController
 		PollMailer.invite(@poll, @email).deliver_now
 		flash[:notice] = "Invite sent!"
 		redirect_to poll_url(@poll)
-
 	end
 
 	private

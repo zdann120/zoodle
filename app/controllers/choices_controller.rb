@@ -21,6 +21,17 @@ class ChoicesController < ApplicationController
 		redirect_to poll_url(@poll)
 	end
 
+	def mark_final
+		@choice = Choice.find(params[:choice_id])
+		@poll = @choice.poll
+		@choice.final = true
+		@choice.save
+		@poll.finalized = true
+		@poll.save
+		flash[:notice] = "Slot marked as final."
+		redirect_to poll_url(@poll)
+	end
+
 	private
 	def choice_params
 		params.require(:choice).permit(:uuid, :time, :closed, :description)

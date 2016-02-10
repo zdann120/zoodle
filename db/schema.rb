@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160210040821) do
+ActiveRecord::Schema.define(version: 20160210043320) do
 
   create_table "active_admin_comments", force: :cascade do |t|
     t.string   "namespace"
@@ -47,6 +47,7 @@ ActiveRecord::Schema.define(version: 20160210040821) do
     t.integer  "user_id"
     t.text     "description"
     t.boolean  "closed",         default: false
+    t.boolean  "finalized",      default: false
     t.index ["user_id"], name: "index_polls_on_user_id"
   end
 

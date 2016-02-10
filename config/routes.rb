@@ -7,7 +7,9 @@ Rails.application.routes.draw do
   
   resources :polls do
   	resources :subscribers
-  	resources :choices
+  	resources :choices do
+      put 'mark_final' => 'choices#mark_final'
+    end
     put 'close' => 'polls#close'
     put 'open' => 'polls#open'
     post 'invite' => 'polls#invite'
