@@ -11,9 +11,9 @@
 				<% end %>
 				<%= choice.final ? raw("<strong>**FINAL**</strong>") : '' %>
 				<% if user_signed_in? %>
-				<% if current_user == @poll.user %>
+				<% if current_user == @poll.user && @poll.finalized == false %>
 					<%= link_to "Delete", poll_choice_path(@poll, choice), method: :delete %>
-					<% if @poll.closed && choice.final == false && @poll.finalized == false %>
+					<% if @poll.closed && choice.final == false %>
 						<%= link_to " Make Final", poll_choice_mark_final_path(@poll, choice), method: :put %>
 					<% end %>
 				<% end %>
