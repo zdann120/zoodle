@@ -28,6 +28,7 @@ class ChoicesController < ApplicationController
 		@choice.save
 		@poll.finalized = true
 		@poll.save
+		PollMailer.choose_final(@poll, @choice).deliver_now
 		flash[:notice] = "Slot marked as final."
 		redirect_to poll_url(@poll)
 	end

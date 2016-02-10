@@ -1,5 +1,6 @@
-<h1>Poll#choose_final</h1>
+<h1>Zoodle!</h1>
 
-<p>
-  <%= @greeting %>, find me in app/views/poll_mailer/choose_final.html.erb
-</p>
+<h2>Final time chosen for: <%= @poll.label %></h2>
+<p><strong>Time chosen:</strong> <%= @choice %></p>
+<p><%= link_to "View Poll", poll_path(@poll) %></p>
+<p>DEMO MODE NOTICE: Normally, this email would be sent to everyone who responded.  However, this was only sent to the poll creator.</p>

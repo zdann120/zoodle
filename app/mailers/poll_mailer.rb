@@ -17,8 +17,9 @@ class PollMailer < ApplicationMailer
   #
   #   en.poll_mailer.choose_final.subject
   #
-  def choose_final(poll)
+  def choose_final(poll, choice)
     @poll = poll
+    @choice = choice
 
     mail to: @poll.user.email, subject: "Zoodle Poll: Final time chosen for #{@poll.label}"
   end
