@@ -2,5 +2,5 @@
 
 <h2>Final time chosen for: <%= @poll.label %></h2>
 <p><strong>Time chosen:</strong> <%= @choice %></p>
-<p><%= link_to "View Poll", poll_path(@poll) %></p>
+<p><%= link_to "View Poll", poll_url(@poll) %></p>
 <p>DEMO MODE NOTICE: Normally, this email would be sent to everyone who responded.  However, this was only sent to the poll creator.</p>
