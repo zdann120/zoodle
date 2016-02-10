@@ -3,7 +3,7 @@
 	<% if @poll.closed == false && current_user == @poll.user  %>
 		<%= link_to "Close Poll", poll_close_path(@poll), method: :put, class: 'btn btn-sm btn-warning' %>
 	<% else %>
-		<% if current_user == @poll.user %>
+		<% if current_user == @poll.user && @poll.finalized == false %>
 			<%= link_to "Re-open Poll", poll_open_path(@poll), method: :put, class: 'btn btn-sm btn-success' %>
 			
 		<% end %>
